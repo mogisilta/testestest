@@ -8,37 +8,37 @@ import { getMaincommunity } from '../api/MainApi/MainClubApi';
 import getMainclub from '../api/MainApi/MainClubApi';
 import { Loading } from '../components/Lodaing';
 import { CommunityPostData } from '../types/CommunityTypes';
-
+import  backImg from '../../public/image 2.png';
 const Main = () => {
-    // const [page, setPage] = useState(1);
-    // const { data: community } = useQuery({
-    //     queryKey: ['maincommunity'],
-    //     queryFn: () => getMaincommunity(),
-    // });
-    // const {
-    //     data: Club,
-    //     isLoading,
-    //     isError,
-    //     error,
-    // } = useQuery({
-    //     queryKey: ['mainClub', page],
-    //     queryFn: () => getMainclub(page),
-    // });
+    const [page, setPage] = useState(1);
+    const { data: community } = useQuery({
+        queryKey: ['maincommunity'],
+        queryFn: () => getMaincommunity(),
+    });
+    const {
+        data: Club,
+        isLoading,
+        isError,
+        error,
+    } = useQuery({
+        queryKey: ['mainClub', page],
+        queryFn: () => getMainclub(page),
+    });
 
-    // const Comudata = community?.postData;
+    const Comudata = community?.postData;
 
-    // if (isLoading) return <Loading />;
+    if (isLoading) return <Loading />;
 
-    // if (isError)
-    //     return (
-    //         <>
-    //             <h3>Oops, someting went wrong</h3> <p>{error.toString()}</p>
-    //         </>
-    //     );
+    if (isError)
+        return (
+            <>
+                <h3>Oops, someting went wrong</h3> <p>{error.toString()}</p>
+            </>
+        );
 
     return (
         <motion.div style={{ width: '100%' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <StyledMain>
+            <StyledMain backgroundImage={backImg}>
                 <StyledContent>물위에서의 재미와 도전 그리고 열정을 공유하는</StyledContent>
                 <StyledImg src={Splashzone}></StyledImg>
             </StyledMain>
@@ -62,7 +62,7 @@ const Main = () => {
 export default Main;
 
 const StyledMain = styled.div`
-    background-image: url('../../public/image 2.png');
+    background-image: url(${(props) => props.backgroundImage});
     background-size: cover;
     box-shadow: 5px 2px 2px 2px;
     display: grid;
