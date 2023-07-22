@@ -24,110 +24,110 @@ type Params = {
 };
 
 const Community = () => {
-    const { tag: currTag, keyword } = useParams<Params>();
-    const [size, setSize] = useState<number>(9);
-    const [totalPageArr, setTotalPageArr] = useState<Array<number>>([]);
-    const [pageArr, setPageArr] = useState<Array<number>>([]);
-    const navigate = useNavigate();
-    const scrollPosition = useSelector((state: RootState) => state.scroll);
-    const dispatch = useDispatch();
+    // const { tag: currTag, keyword } = useParams<Params>();
+    // const [size, setSize] = useState<number>(9);
+    // const [totalPageArr, setTotalPageArr] = useState<Array<number>>([]);
+    // const [pageArr, setPageArr] = useState<Array<number>>([]);
+    // const navigate = useNavigate();
+    // const scrollPosition = useSelector((state: RootState) => state.scroll);
+    // const dispatch = useDispatch();
 
-    const totalPageNum = totalPageArr[totalPageArr.length - 1] || 1;
+    // const totalPageNum = totalPageArr[totalPageArr.length - 1] || 1;
 
-    function useQueryParam() {
-        //console.log(useLocation().search);
-        return new URLSearchParams(useLocation().search);
-    }
+    // function useQueryParam() {
+    //     //console.log(useLocation().search);
+    //     return new URLSearchParams(useLocation().search);
+    // }
 
-    //URLSearchParams 객체(query)는 get메서드로 쿼리파라미터 값 불러올 수있음.
-    const query = useQueryParam();
-    const page = Number(query.get('page') || 1); // 기본 페이지를 1로 설정
+    // //URLSearchParams 객체(query)는 get메서드로 쿼리파라미터 값 불러올 수있음.
+    // const query = useQueryParam();
+    // const page = Number(query.get('page') || 1); // 기본 페이지를 1로 설정
 
-    console.log(page);
+    // console.log(page);
 
-    const {
-        isLoading,
-        error: errorData,
-        data: allCommunityData,
-    } = useQuery(
-        ['community', page],
-        () => {
-            console.log(`${page}페이지의 데이터를 가져옵니다.`);
-            return getTotalCommunityPost(page, size);
-        },
-        {
-            staleTime: 10000, // 10초
-        },
-    );
+    // const {
+    //     isLoading,
+    //     error: errorData,
+    //     data: allCommunityData,
+    // } = useQuery(
+    //     ['community', page],
+    //     () => {
+    //         console.log(`${page}페이지의 데이터를 가져옵니다.`);
+    //         return getTotalCommunityPost(page, size);
+    //     },
+    //     {
+    //         staleTime: 10000, // 10초
+    //     },
+    // );
 
-    //페이지버튼 관련 상태 업데이트
-    useEffect(() => {
-        if (allCommunityData) {
-            const totalPageNum = allCommunityData.pageInfo.totalPages;
-            const totalPageArr = [...Array(totalPageNum).keys()].map((x) => x + 1);
-            //ex) 한 화면에서 보여지는 페이지번호가 1~5일 때 firstPageNum은 1
-            const firstPageNum = Math.floor((page - 1) / PAGE_COUNT) * PAGE_COUNT + 1;
-            //ex) 한 화면에서 보여지는 페이지번호가 1~5일 때 lastPageNum은 5
-            //ex) 총 번호갯수 8이라고 할 때, 다음버튼 눌렀을 때 6~10이 아닌 (firstPageNum)6 ~ (lastPageNum)8이 보여야함.
-            const lastPageNum =
-                totalPageNum > Math.ceil(page / PAGE_COUNT) * PAGE_COUNT
-                    ? Math.ceil(page / PAGE_COUNT) * PAGE_COUNT
-                    : totalPageNum;
-            setTotalPageArr(totalPageArr);
-            setPageArr([...totalPageArr.slice(firstPageNum - 1, lastPageNum)]);
-        }
-    }, [allCommunityData, page]);
+    // //페이지버튼 관련 상태 업데이트
+    // useEffect(() => {
+    //     if (allCommunityData) {
+    //         const totalPageNum = allCommunityData.pageInfo.totalPages;
+    //         const totalPageArr = [...Array(totalPageNum).keys()].map((x) => x + 1);
+    //         //ex) 한 화면에서 보여지는 페이지번호가 1~5일 때 firstPageNum은 1
+    //         const firstPageNum = Math.floor((page - 1) / PAGE_COUNT) * PAGE_COUNT + 1;
+    //         //ex) 한 화면에서 보여지는 페이지번호가 1~5일 때 lastPageNum은 5
+    //         //ex) 총 번호갯수 8이라고 할 때, 다음버튼 눌렀을 때 6~10이 아닌 (firstPageNum)6 ~ (lastPageNum)8이 보여야함.
+    //         const lastPageNum =
+    //             totalPageNum > Math.ceil(page / PAGE_COUNT) * PAGE_COUNT
+    //                 ? Math.ceil(page / PAGE_COUNT) * PAGE_COUNT
+    //                 : totalPageNum;
+    //         setTotalPageArr(totalPageArr);
+    //         setPageArr([...totalPageArr.slice(firstPageNum - 1, lastPageNum)]);
+    //     }
+    // }, [allCommunityData, page]);
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            window.scrollTo(0, scrollPosition);
-        }, 500); // 0.5초 후에 실행
-        return () => clearTimeout(timer);
-    }, [page]);
+    // useEffect(() => {
+    //     const timer = setTimeout(() => {
+    //         window.scrollTo(0, scrollPosition);
+    //     }, 500); // 0.5초 후에 실행
+    //     return () => clearTimeout(timer);
+    // }, [page]);
 
-    //다음|이전 버튼 클릭 시, 페이지 변경
-    const handlePageList = (e: React.MouseEvent<HTMLLIElement>) => {
-        if (e.currentTarget.innerText === '>>' && pageArr[pageArr.length - 1] !== totalPageNum) {
-            dispatch(savePosition(window.scrollY));
-            navigate(`/community/${currTag}/${keyword}?page=${pageArr[pageArr.length - 1] + 1}`);
-        }
+    // //다음|이전 버튼 클릭 시, 페이지 변경
+    // const handlePageList = (e: React.MouseEvent<HTMLLIElement>) => {
+    //     if (e.currentTarget.innerText === '>>' && pageArr[pageArr.length - 1] !== totalPageNum) {
+    //         dispatch(savePosition(window.scrollY));
+    //         navigate(`/community/${currTag}/${keyword}?page=${pageArr[pageArr.length - 1] + 1}`);
+    //     }
 
-        if (e.currentTarget.innerText === '<<' && !pageArr.includes(1)) {
-            dispatch(savePosition(window.scrollY));
-            navigate(`/community/${currTag}/${keyword}?page=${pageArr[0] - PAGE_COUNT}`);
-        }
-    };
+    //     if (e.currentTarget.innerText === '<<' && !pageArr.includes(1)) {
+    //         dispatch(savePosition(window.scrollY));
+    //         navigate(`/community/${currTag}/${keyword}?page=${pageArr[0] - PAGE_COUNT}`);
+    //     }
+    // };
 
-    const handleMoveByOne = (e: React.MouseEvent<HTMLLIElement>) => {
-        if (e.currentTarget.innerText === '>' && page !== totalPageNum) {
-            dispatch(savePosition(window.scrollY));
+    // const handleMoveByOne = (e: React.MouseEvent<HTMLLIElement>) => {
+    //     if (e.currentTarget.innerText === '>' && page !== totalPageNum) {
+    //         dispatch(savePosition(window.scrollY));
 
-            navigate(`/community/${currTag}/${keyword}?page=${page + 1}`);
-        }
+    //         navigate(`/community/${currTag}/${keyword}?page=${page + 1}`);
+    //     }
 
-        if (e.currentTarget.innerText === '<' && page !== 1) {
-            dispatch(savePosition(window.scrollY));
-            navigate(`/community/${currTag}/${keyword}?page=${page - 1}`);
-        }
-    };
+    //     if (e.currentTarget.innerText === '<' && page !== 1) {
+    //         dispatch(savePosition(window.scrollY));
+    //         navigate(`/community/${currTag}/${keyword}?page=${page - 1}`);
+    //     }
+    // };
 
-    const handleNavigateCreate = () => {
-        navigate('/community/create', { state: 'community' });
-    };
+    // const handleNavigateCreate = () => {
+    //     navigate('/community/create', { state: 'community' });
+    // };
 
-    //페이지번호 버튼 클릭 시, 페이지 변경
-    const handleCurrPage = (e: React.MouseEvent<HTMLLIElement>) => {
-        dispatch(savePosition(window.scrollY));
-        const clickedPageNum = Number(e.currentTarget.innerText);
-        navigate(`/community/${currTag}/${keyword}?page=${clickedPageNum}`);
-    };
+    // //페이지번호 버튼 클릭 시, 페이지 변경
+    // const handleCurrPage = (e: React.MouseEvent<HTMLLIElement>) => {
+    //     dispatch(savePosition(window.scrollY));
+    //     const clickedPageNum = Number(e.currentTarget.innerText);
+    //     navigate(`/community/${currTag}/${keyword}?page=${clickedPageNum}`);
+    // };
 
-    if (isLoading) {
-        return <Loading />;
-    }
-    if (errorData) {
-        return <div>에러발생..!</div>;
-    }
+    // if (isLoading) {
+    //     return <Loading />;
+    // }
+    // if (errorData) {
+    //     return <div>에러발생..!</div>;
+    // }
 
     return (
         <CommunityWarp initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
