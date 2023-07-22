@@ -10,31 +10,31 @@ import { Loading } from '../components/Lodaing';
 import { CommunityPostData } from '../types/CommunityTypes';
 import  backImg from '../../public/image 2.png';
 const Main = () => {
-    // const [page, setPage] = useState(1);
-    // const { data: community } = useQuery({
-    //     queryKey: ['maincommunity'],
-    //     queryFn: () => getMaincommunity(),
-    // });
-    // const {
-    //     data: Club,
-    //     isLoading,
-    //     isError,
-    //     error,
-    // } = useQuery({
-    //     queryKey: ['mainClub', page],
-    //     queryFn: () => getMainclub(page),
-    // });
+    const [page, setPage] = useState(1);
+    const { data: community } = useQuery({
+        queryKey: ['maincommunity'],
+        queryFn: () => getMaincommunity(),
+    });
+    const {
+        data: Club,
+        isLoading,
+        isError,
+        error,
+    } = useQuery({
+        queryKey: ['mainClub', page],
+        queryFn: () => getMainclub(page),
+    });
 
-    // const Comudata = community?.postData;
+    const Comudata = community?.postData;
 
-    // if (isLoading) return <Loading />;
+    if (isLoading) return <Loading />;
 
-    // if (isError)
-    //     return (
-    //         <>
-    //             <h3>Oops, someting went wrong</h3> <p>{error.toString()}</p>
-    //         </>
-    //     );
+    if (isError)
+        return (
+            <>
+                <h3>Oops, someting went wrong</h3> <p>{error.toString()}</p>
+            </>
+        );
 
     return (
         <motion.div style={{ width: '100%' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
@@ -42,7 +42,7 @@ const Main = () => {
                 <StyledContent>물위에서의 재미와 도전 그리고 열정을 공유하는</StyledContent>
                 <StyledImg src={Splashzone}></StyledImg>
             </StyledMain>
-            {/* <StyledClub>
+            <StyledClub>
                 <div style={{ display: 'flex' }}>
                     {Club.map((clubData) => {
                         return <ContentsCard key={clubData.boardClubId} clubProps={clubData} type={'club'} />;
@@ -54,7 +54,7 @@ const Main = () => {
                             <ContentsCard key={`all_${item.standardId}`} communityProps={item} type={'community'} />
                         ))}
                 </div>
-            </StyledClub> */}
+            </StyledClub>
         </motion.div>
     );
 };
