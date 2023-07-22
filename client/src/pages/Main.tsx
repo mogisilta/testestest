@@ -42,7 +42,7 @@ const Main = () => {
                 <StyledContent>물위에서의 재미와 도전 그리고 열정을 공유하는</StyledContent>
                 <StyledImg src={Splashzone}></StyledImg>
             </StyledMain>
-            <StyledClub>
+            {/* <StyledClub>
                 <div style={{ display: 'flex' }}>
                     {Club.map((clubData) => {
                         return <ContentsCard key={clubData.boardClubId} clubProps={clubData} type={'club'} />;
@@ -54,7 +54,7 @@ const Main = () => {
                             <ContentsCard key={`all_${item.standardId}`} communityProps={item} type={'community'} />
                         ))}
                 </div>
-            </StyledClub>
+            </StyledClub> */}
         </motion.div>
     );
 };

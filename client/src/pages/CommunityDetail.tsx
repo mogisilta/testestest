@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { useParams, useNavigate } from 'react-router-dom';
-import backgroundImg from '../assets/Community_background.png';
+import backgroundImg from '../../public/Community_background.png';
 import DetailCommentSection from '../components/DetailCommentSection.tsx';
 import DetailContentSection from '../components/DetailContentSection.tsx';
 import { Loading } from '../components/Lodaing.tsx';

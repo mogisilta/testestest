@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-import backgroundImg from '../assets/Community_background.png';
+import backgroundImg from '../../public/Community_background.png';
 import ViewIcon from '../assets/View.svg';
 import CommentIcon from '../assets/Comment.svg';
 import { useForm, SubmitHandler } from 'react-hook-form';
