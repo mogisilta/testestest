@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { SubmitHandler } from 'react-hook-form';
 import { motion } from 'framer-motion';
 
-import BackgroundImg from '../assets/oceanbeach.png';
+import BackgroundImg from '../../public/oceanbeach.png';
 import ScrollBanner from '../components/common/ScrollBanner';
 import ContentsCard from '../components/common/ContentsCard';
 import TagSearchSection from '../components/common/TagSearchSection.tsx';
