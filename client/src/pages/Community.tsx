@@ -132,28 +132,7 @@ const Community = () => {
     return (
         <CommunityWarp initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <ScrollBanner bannerImg={backgroundImg} />
-            <CommunityContainer>
-                {/* <PopularContentsSection /> */}
-                <TagSearchSection currTag={currTag} handleNavigateCreate={handleNavigateCreate} />
-                <BottomSection>
-                    <AllPostContainer>
-                        {allCommunityData?.postData.map((item: CommunityPostData) => (
-                            <ContentsCard key={`all_${item.standardId}`} communityProps={item} type={'community'} />
-                        ))}
-                    </AllPostContainer>
-                    <PageContainer>
-                        {!pageArr.includes(1) && <PageButton onClick={handlePageList} data={{ value: '<<', page }} />}
-                        {page !== 1 && <PageButton onClick={handleMoveByOne} data={{ value: '<', page }} />}
-                        {pageArr.map((value, idx) => (
-                            <PageButton key={idx} onClick={handleCurrPage} data={{ value, page }} />
-                        ))}
-                        {page !== totalPageNum && <PageButton onClick={handleMoveByOne} data={{ value: '>', page }} />}
-                        {!pageArr.includes(totalPageNum) && (
-                            <PageButton onClick={handlePageList} data={{ value: '>>', page }} />
-                        )}
-                    </PageContainer>
-                </BottomSection>
-            </CommunityContainer>
+            
         </CommunityWarp>
     );
 };
